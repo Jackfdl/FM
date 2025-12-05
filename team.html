@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Il team di professionisti dello Studio Legale Fedeli, Macchi & Partners - Avvocati esperti a Milano specializzati in diverse aree del diritto.">
+    <title>Il Team | Studio Legale Fedeli, Macchi & Partners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #d4af37;
+            --light: #f8f9fa;
+            --dark: #2c2c2c;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        .logo-sub {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: normal;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--secondary);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--secondary);
+        }
+
+        .cta-button::after {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-intro h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.9;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, var(--primary), #2c5282);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4.5rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+        }
+
+        .team-info {
+            padding: 2.5rem;
+        }
+
+        .team-name {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .team-role {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .team-title {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .team-specialization {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-specialization h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .team-specialization p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .team-bio {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.98rem;
+        }
+
+        .team-contact {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--light);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .team-email {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .team-email:hover {
+            color: var(--secondary);
+        }
+
+        /* Legacy Section */
+        .legacy-section {
+            background: var(--light);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .legacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .legacy-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .legacy-founder {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .legacy-content p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .legacy-quote {
+            background: var(--white);
+            padding: 2rem;
+            border-left: 4px solid var(--secondary);
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-style: italic;
+            color: #555;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--white);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            line-height: 2;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-intro h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-main">FM</span>
+                <span class="logo-sub">Studio Legale</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="studio.html">Lo Studio</a></li>
+                    <li><a href="aree-pratica.html">Aree di Pratica</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="contatti.html" class="cta-button">Contattaci</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Il Nostro Team</h1>
+        <p>Professionisti esperti e qualificati al vostro servizio</p>
+    </section>
+
+    <!-- Team Intro -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Competenza e Professionalità</h2>
+                <p>Il nostro team è composto da avvocati specializzati in diverse aree del diritto, uniti dalla passione per la giustizia e dall'impegno costante verso l'eccellenza professionale. Ogni professionista porta competenze uniche che, insieme, offrono ai nostri clienti un'assistenza completa e di altissimo livello.</p>
+            </div>
+
+            <!-- Team Grid -->
+            <div class="team-grid">
+                <!-- Avv. Alberto Fedeli -->
+                <div class="team-card">
+                    <div class="team-image">AF</div>
+                    <div class="team-info">
+                        <h3 class="team-name">Avv. Alberto Fedeli</h3>
+                        <p class="team-role">Titolare di Studio</p>
+                        <p class="team-title">Partner, già associato con l'Avv. Bassano Baroni</p>
+                        
+                        <div class="team-specialization">
+                            <h4>Aree di Specializzazione</h4>
+                            <p>Diritto Amministrativo, Enti del Terzo Settore, Diritto Tributario, Diritto delle Acque Pubbliche</p>
+                        </div>
+
+                        <p class="team-bio">
+                            Titolare di Studio, già associato con l'Avv. Bassano Baroni. Si occupa principalmente di diritto amministrativo (con particolare riferimento a edilizia e urbanistica, ambiente, espropriazioni, società pubbliche, contratti pubblici: appalti, concessioni, ecc.), enti del terzo settore ed enti ecclesiastici, enti gestori servizi sanitari, sociosanitari e sociali, enti gestori di scuole paritarie, Organismi di vigilanza ex D.lgs. 231/2001, diritto tributario (in particolare disciplina di esenzione IMU), diritto delle acque pubbliche.
+                        </p>
+
+                        <div class="team-contact">
+                            <div class="contact-icon">✉</div>
+                            <a href="mailto:albertofedeli@fmlex.it" class="team-email">albertofedeli@fmlex.it</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avv. Giulia Macchi -->
+                <div class="team-card">
+                    <div class="team-image">GM</div>
+                    <div class="team-info">
+                        <h3 class="team-name">Avv. Giulia Macchi</h3>
+                        <p class="team-role">Contitolare di Studio</p>
+                        <p class="team-title">Avvocato del Foro di Busto Arsizio</p>
+                        
+                        <div class="team-specialization">
+                            <h4>Aree di Specializzazione</h4>
+                            <p>Responsabilità Medica, Diritto Civile, Diritto delle Locazioni, Privacy</p>
+                        </div>
+
+                        <p class="team-bio">
+                            Contitolare di Studio, è Avvocato del Foro di Busto Arsizio. Dopo la laurea in Giurisprudenza conseguita all'Università degli Studi di Milano, frequenta la scuola di specializzazione per le professioni forensi. Professionalmente specializzata in responsabilità medica, ha maturato esperienza in diritto civile, diritto delle locazioni, recupero crediti ed esecuzioni, volontaria giurisdizione (in particolare amministrazioni di sostegno e tutele), consulenza a società in materia contrattualistica e privacy.
+                        </p>
+
+                        <div class="team-contact">
+                            <div class="contact-icon">✉</div>
+                            <a href="mailto:giuliamacchi@fmlex.it" class="team-email">giuliamacchi@fmlex.it</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avv. Nadia Zilli -->
+                <div class="team-card">
+                    <div class="team-image">NZ</div>
+                    <div class="team-info">
+                        <h3 class="team-name">Avv. Nadia Zilli</h3>
+                        <p class="team-role">Avvocato</p>
+                        <p class="team-title">Avvocato del Foro di Milano</p>
+                        
+                        <div class="team-specialization">
+                            <h4>Aree di Specializzazione</h4>
+                            <p>Diritto di Famiglia, Responsabilità Medica, Diritto Civile, Diritto Condominiale</p>
+                        </div>
+
+                        <p class="team-bio">
+                            Avvocato del Foro di Milano. Dopo la laurea in Giurisprudenza all'Università Statale degli Studi di Milano, si è specializzata in diritto di famiglia e responsabilità medica. Ha, inoltre, maturato comprovata esperienza in diritto civile, diritto condominiale, locazioni, attività di recupero del credito per grandi e piccole società e contrattualistica.
+                        </p>
+
+                        <div class="team-contact">
+                            <div class="contact-icon">✉</div>
+                            <a href="mailto:nadiazilli@fmlex.it" class="team-email">nadiazilli@fmlex.it</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avv. Erika Pallone -->
+                <div class="team-card">
+                    <div class="team-image">EP</div>
+                    <div class="team-info">
+                        <h3 class="team-name">Avv. Erika Pallone</h3>
+                        <p class="team-role">Avvocato</p>
+                        <p class="team-title">Avvocato del Foro di Milano</p>
+                        
+                        <div class="team-specialization">
+                            <h4>Aree di Specializzazione</h4>
+                            <p>Privacy e Protezione Dati, Diritto Civile, Diritto Agrario, Diritto Tributario</p>
+                        </div>
+
+                        <p class="team-bio">
+                            Avvocato del Foro di Milano. Dopo la laurea in Giurisprudenza all'Università Statale degli Studi di Milano, si è perfezionata in informatica giuridica e protezione dei dati personali. Si è specializzata in modo trasversale nell'ambito del diritto civile e nella consulenza per la privacy e la protezione dei dati personali. Ha maturato esperienza anche nel diritto agrario, diritto delle acque pubbliche e diritto tributario. Autrice di numerosi articoli su Quotidiano Giuridico, Portale Ridare e Ciberspazio e Diritto.
+                        </p>
+
+                        <div class="team-contact">
+                            <div class="contact-icon">✉</div>
+                            <a href="mailto:erikapallone@fmlex.it" class="team-email">erikapallone@fmlex.it</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avv. Andrea Turolla -->
+                <div class="team-card">
+                    <div class="team-image">AT</div>
+                    <div class="team-info">
+                        <h3 class="team-name">Avv. Andrea Turolla</h3>
+                        <p class="team-role">Avvocato</p>
+                        <p class="team-title">Avvocato del Foro di Milano - Dottore di Ricerca</p>
+                        
+                        <div class="team-specialization">
+                            <h4>Aree di Specializzazione</h4>
+                            <p>Diritto delle Successioni, Diritto Agrario, Enti Non Profit</p>
+                        </div>
+
+                        <p class="team-bio">
+                            Avvocato del Foro di Milano. Dopo la laurea in Giurisprudenza all'Università Cattolica del Sacro Cuore - Sede di Milano, ha conseguito il titolo di Dottore di ricerca in Diritto Pubblico dell'Economia all'Università di Milano - Bicocca. Professionalmente si è specializzato nel diritto delle successioni e in quello agrario, oltre che nella consulenza per gli enti non profit. In ambito accademico, la sua ricerca si è sviluppata tra la Dottrina dello Stato e lo studio della Costituzione economica, in particolare con riguardo alle forme di partecipazione dei lavoratori all'impresa.
+                        </p>
+
+                        <div class="team-contact">
+                            <div class="contact-icon">✉</div>
+                            <a href="mailto:andreaturolla@fmlex.it" class="team-email">andreaturolla@fmlex.it</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legacy Section -->
+    <section class="legacy-section">
+        <div class="container">
+            <div class="legacy-content">
+                <h2>L'Eredità del Fondatore</h2>
+                <p class="legacy-founder">Avv. Bassano Baroni (1979 - Fondatore)</p>
+                <p>
+                    Lo Studio Legale Fedeli, Macchi & Partners porta avanti i valori e l'eccellenza professionale instaurati dall'Avvocato Bassano Baroni, fondatore dello studio nel 1979. La sua visione di un'assistenza legale basata su competenza, etica e dedizione al cliente continua a guidare il nostro operato quotidiano.
+                </p>
+                <p>
+                    L'Avv. Alberto Fedeli, che ha lavorato a stretto contatto con l'Avv. Baroni come associato, ha raccolto questa eredità portando lo studio nel futuro, mantenendo saldi i principi fondanti e arricchendoli con nuove competenze e una visione moderna del diritto.
+                </p>
+                <div class="legacy-quote">
+                    "La vera forza di uno studio legale risiede nella capacità di unire tradizione e innovazione, mantenendo sempre al centro la giustizia e il servizio al cliente."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Vuoi conoscere il nostro team?</h2>
+            <p>Contattaci per scoprire come possiamo assisterti con competenza e professionalità.</p>
+            <div class="hero-cta">
+                <a href="contatti.html" class="btn-primary">Richiedi una Consulenza</a>
+                <a href="tel:0286460223" class="btn-secondary">☎ 02 8646 0223</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Studio Legale Fedeli, Macchi & Partners</h3>
+                <p>Dal 1979 offriamo assistenza legale qualificata a Milano e in tutta Italia.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contatti</h3>
+                <div class="footer-links">
+                    <p>Via Vincenzo Monti n. 56<br>20123 Milano</p>
+                    <a href="tel:0286460223">Tel: 02 8646 0223</a>
+                    <a href="mailto:segreteria@fmlex.it">segreteria@fmlex.it</a>
+                    <p>Orari: Su prenotazione</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Link Rapidi</h3>
+                <div class="footer-links">
+                    <a href="studio.html">Lo Studio</a>
+                    <a href="aree-pratica.html">Aree di Pratica</a>
+                    <a href="team.html">Il Team</a>
+                    <a href="contatti.html">Contatti</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Studio Legale Fedeli, Macchi & Partners - P.IVA: 0000000 - Tutti i diritti riservati</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
