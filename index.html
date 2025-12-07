@@ -53,23 +53,27 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
             text-decoration: none;
             display: flex;
-            flex-direction: column;
+            align-items: center;
         }
 
-        .logo-main {
-            font-size: 1.8rem;
-            letter-spacing: 2px;
+        .logo img {
+            max-height: 80px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
         }
 
-        .logo-sub {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            font-weight: normal;
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Versione responsive per mobile */
+        @media (max-width: 768px) {
+            .logo img {
+                max-height: 40px;
+            }
         }
 
         nav ul {
@@ -139,12 +143,59 @@
         /* Hero Section */
         .hero {
             margin-top: 80px;
-            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.7) 0%, rgba(44, 82, 130, 0.6) 100%);
             color: var(--white);
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Slideshow Background */
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide:nth-child(1) {
+            background-image: url('images/milano-hero-1.jpg');
+        }
+
+        .hero-slide:nth-child(2) {
+            background-image: url('images/milano-hero-2.jpg');
+        }
+
+        .hero-slide:nth-child(3) {
+            background-image: url('images/milano-hero-3.jpg');
+        }
+
+        /* Fallback se le immagini non caricano */
+        .hero.no-images {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
         }
 
         .hero::before {
@@ -157,6 +208,7 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.05)"></path></svg>') no-repeat bottom;
             background-size: cover;
             opacity: 0.3;
+            z-index: 0;
         }
 
         .hero-content {
@@ -331,17 +383,42 @@
         }
 
         .service-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), #2c5282);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), #2c5282);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-icon img {
+    width: 36px !important;
+    height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
+    object-fit: contain !important;
+    filter: brightness(0) invert(1) !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Fallback emoji */
+.service-icon::before {
+    content: attr(data-emoji);
+    font-size: 1.8rem;
+    display: block;
+}
+
+.service-icon:has(img) ::before {
+    display: none;
+}
 
         .service-card h3 {
             font-size: 1.5rem;
@@ -436,6 +513,189 @@
 
         .team-email:hover {
             color: var(--secondary);
+        }
+
+        /* LinkedIn Section */
+        .linkedin-section {
+            padding: 5rem 2rem;
+            background: var(--light);
+        }
+
+        .linkedin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .linkedin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .linkedin-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .linkedin-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .linkedin-header p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 1.5rem;
+        }
+
+        .linkedin-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .linkedin-feed {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            min-height: 500px;
+            max-height: 700px;
+            overflow-y: auto;
+        }
+
+        .linkedin-post {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            border-left: 4px solid #0A66C2;
+        }
+
+        .linkedin-post:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .post-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .post-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .post-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-meta strong {
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .post-date {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .post-content h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .post-content p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .post-link {
+            color: #0A66C2;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .post-link:hover {
+            gap: 1rem;
+            color: #004182;
+        }
+
+        .linkedin-cta {
+            background: linear-gradient(135deg, var(--primary), #2c5282);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            position: sticky;
+            top: 100px;
+        }
+
+        .linkedin-icon {
+            width: 80px;
+            height: 80px;
+            background: #0A66C2;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .linkedin-cta h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .linkedin-cta p {
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .linkedin-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #0A66C2;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .linkedin-btn:hover {
+            background: #004182;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(10, 102, 194, 0.3);
         }
 
         /* CTA Section */
@@ -682,16 +942,16 @@
     <header class="header" id="header">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="Studio Legale FM">
-                <span class="logo-sub">Studio Legale</span>
+                <img src="images/logo.png" alt="Studio Legale Fedeli, Macchi & Partners">
             </a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
             <nav>
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="studio.html">Lo Studio</a></li>
-                    <li><a href="aree-pratica.html">Aree di Pratica</a></li>
+                    <li><a href="specializzazioni.html">Specializzazioni</a></li>
                     <li><a href="team.html">Team</a></li>
+                    <li><a href="approfondimenti.html">Approfondimenti</a></li>
                     <li><a href="contatti.html" class="cta-button">Contattaci</a></li>
                 </ul>
             </nav>
@@ -700,6 +960,13 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Slideshow Background -->
+        <div class="hero-slideshow">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+        
         <div class="hero-content">
             <div class="hero-subtitle">Dal 1979 al vostro servizio</div>
             <h1>Esperienza, Competenza e Professionalità</h1>
@@ -742,40 +1009,52 @@
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">⚖️</div>
+                    <div class="service-icon" data-emoji="⚖️">
+                        <img src="images/icons/amministrativo.png" alt="Diritto Amministrativo" onerror="this.style.display='none'">
+                    </div>
                     <h3>Diritto Amministrativo</h3>
                     <p>Edilizia, urbanistica, ambiente, contratti pubblici, enti locali e responsabilità erariale.</p>
-                    <a href="aree-pratica.html#amministrativo" class="service-link">Scopri di più →</a>
+                    <a href="specializzazioni.html#amministrativo" class="service-link">Scopri di più →</a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">📋</div>
+                    <div class="service-icon" data-emoji="📋">
+                        <img src="images/icons/civile.png" alt="Diritto Civile" onerror="this.style.display='none'">
+                    </div>
                     <h3>Diritto Civile</h3>
                     <p>Contrattualistica, diritto condominiale, successioni, recupero crediti e procedure esecutive.</p>
-                    <a href="aree-pratica.html#civile" class="service-link">Scopri di più →</a>
+                    <a href="specializzazioni.html#civile" class="service-link">Scopri di più →</a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">👨‍👩‍👧</div>
+                    <div class="service-icon" data-emoji="👨‍👩‍👧">
+                        <img src="images/icons/famiglia.png" alt="Diritto di Famiglia" onerror="this.style.display='none'">
+                    </div>
                     <h3>Diritto di Famiglia</h3>
                     <p>Separazioni, divorzi, unioni civili, tutele e amministrazione di sostegno.</p>
-                    <a href="aree-pratica.html#famiglia" class="service-link">Scopri di più →</a>
+                    <a href="specializzazioni.html#famiglia" class="service-link">Scopri di più →</a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🏥</div>
+                    <div class="service-icon" data-emoji="🏥">
+                        <img src="images/icons/sanitaria.png" alt="Responsabilità Sanitaria" onerror="this.style.display='none'">
+                    </div>
                     <h3>Responsabilità Sanitaria</h3>
                     <p>Assistenza in casi di responsabilità medica e contenzioso sanitario.</p>
-                    <a href="aree-pratica.html#sanitaria" class="service-link">Scopri di più →</a>
+                    <a href="specializzazioni.html#sanitaria" class="service-link">Scopri di più →</a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🤝</div>
+                    <div class="service-icon" data-emoji="🤝">
+                        <img src="images/icons/terzo-settore.png" alt="Terzo Settore" onerror="this.style.display='none'">
+                    </div>
                     <h3>Terzo Settore</h3>
                     <p>Enti del terzo settore, enti ecclesiastici, impresa sociale e scuole paritarie.</p>
-                    <a href="aree-pratica.html#terzo-settore" class="service-link">Scopri di più →</a>
+                    <a href="specializzazioni.html#terzo-settore" class="service-link">Scopri di più →</a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🔒</div>
+                    <div class="service-icon" data-emoji="🔒">
+                        <img src="images/icons/privacy.png" alt="Privacy e GDPR" onerror="this.style.display='none'">
+                    </div>
                     <h3>Privacy e GDPR</h3>
                     <p>Consulenza per protezione dati personali, adeguamenti GDPR e contrattualistica digitale.</p>
-                    <a href="aree-pratica.html#privacy" class="service-link">Scopri di più →</a>
+                    <a href="specializzazioni.html#privacy" class="service-link">Scopri di più →</a>
                 </div>
             </div>
         </div>
@@ -803,6 +1082,98 @@
                 <div class="service-card">
                     <h3>Innovazione e Tradizione</h3>
                     <p>Uniamo l'esperienza della tradizione alle tecnologie e metodologie più moderne.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LinkedIn Section -->
+    <section class="linkedin-section">
+        <div class="container">
+            <div class="linkedin-header">
+                <h2>Seguici su LinkedIn</h2>
+                <p>Rimani aggiornato sulle nostre attività, news legali e approfondimenti professionali</p>
+            </div>
+            
+            <div class="linkedin-content">
+                <div class="linkedin-feed">
+                    <h3 style="color: var(--primary); margin-bottom: 2rem; font-size: 1.5rem;">Ultimi Aggiornamenti</h3>
+                    
+                    <!-- Post 1 - ESEMPIO DA AGGIORNARE -->
+                    <div class="linkedin-post">
+                        <div class="post-header">
+                            <div class="post-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0A66C2">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                            <div class="post-meta">
+                                <strong>Studio Legale Fedeli, Macchi & Partners</strong>
+                                <span class="post-date">📅 Dicembre 2024</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Novità legislative in materia di diritto amministrativo</h4>
+                            <p>Importante aggiornamento sulle recenti modifiche normative che impattano gli enti del terzo settore. Il nostro team ha analizzato le implicazioni pratiche per le organizzazioni...</p>
+                            <a href="https://www.linkedin.com/company/studio-fedeli-macchi-partners" target="_blank" class="post-link">Leggi su LinkedIn →</a>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 - ESEMPIO DA AGGIORNARE -->
+                    <div class="linkedin-post">
+                        <div class="post-header">
+                            <div class="post-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0A66C2">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                            <div class="post-meta">
+                                <strong>Studio Legale Fedeli, Macchi & Partners</strong>
+                                <span class="post-date">📅 Novembre 2024</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Sentenza importante in materia di IMU</h4>
+                            <p>La Commissione Tributaria Provinciale di Milano ha confermato l'orientamento favorevole dello studio in materia di esenzione IMU per terreni vincolati...</p>
+                            <a href="https://www.linkedin.com/company/studio-fedeli-macchi-partners" target="_blank" class="post-link">Leggi su LinkedIn →</a>
+                        </div>
+                    </div>
+
+                    <!-- Post 3 - ESEMPIO DA AGGIORNARE -->
+                    <div class="linkedin-post">
+                        <div class="post-header">
+                            <div class="post-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#0A66C2">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                            <div class="post-meta">
+                                <strong>Studio Legale Fedeli, Macchi & Partners</strong>
+                                <span class="post-date">📅 Ottobre 2024</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <h4>Webinar: Privacy e GDPR per le imprese</h4>
+                            <p>Il nostro studio ha organizzato un webinar dedicato alle PMI sul tema della protezione dei dati personali. Grande partecipazione e interesse per gli aspetti pratici...</p>
+                            <a href="https://www.linkedin.com/company/studio-fedeli-macchi-partners" target="_blank" class="post-link">Leggi su LinkedIn →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="linkedin-cta">
+                    <div class="linkedin-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </div>
+                    <h3>Connettiti con noi</h3>
+                    <p>Segui la nostra pagina aziendale per rimanere sempre informato su novità legislative, sentenze importanti e attività dello studio.</p>
+                    <a href="https://www.linkedin.com/company/studio-fedeli-macchi-partners" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                        Seguici su LinkedIn →
+                    </a>
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                        <p style="font-size: 0.9rem; opacity: 0.8;">📊 Oltre 500+ follower<br>🎯 Aggiornamenti settimanali<br>💼 Network professionale</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -851,6 +1222,9 @@
         </div>
     </footer>
 
+    <!-- Cookie Consent Banner -->
+    <script src="cookie-banner.js"></script>
+
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -882,9 +1256,22 @@
                 }
             });
         });
+
+        // Hero Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const slideCount = slides.length;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slideCount;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Cambia immagine ogni 5 secondi
+        setInterval(nextSlide, 5000);
     </script>
-<!-- Extra Features -->
-<script src="extra-features.js"></script>
-<link rel="stylesheet" href="extra-styles.css">
 </body>
 </html>
+
+                

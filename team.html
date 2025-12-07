@@ -2,6 +2,12 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Il team di professionisti dello Studio Legale Fedeli, Macchi & Partners - Avvocati esperti a Milano specializzati in diverse aree del diritto.">
     <title>Il Team | Studio Legale Fedeli, Macchi & Partners</title>
@@ -48,23 +54,27 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
             text-decoration: none;
             display: flex;
-            flex-direction: column;
+            align-items: center;
         }
 
-        .logo-main {
-            font-size: 1.8rem;
-            letter-spacing: 2px;
+        .logo img {
+            max-height: 80px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
         }
 
-        .logo-sub {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            font-weight: normal;
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Versione responsive per mobile */
+        @media (max-width: 768px) {
+            .logo img {
+                max-height: 40px;
+            }
         }
 
         nav ul {
@@ -133,15 +143,57 @@
         /* Page Header */
         .page-header {
             margin-top: 80px;
-            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.8) 0%, rgba(44, 82, 130, 0.7) 100%);
             color: var(--white);
             padding: 4rem 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Slideshow Background */
+        .page-header-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .page-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .page-slide.active {
+            opacity: 1;
+        }
+
+        .page-slide:nth-child(1) {
+            background-image: url('images/team-header-1.jpg');
+        }
+
+        .page-slide:nth-child(2) {
+            background-image: url('images/team-header-2.jpg');
+        }
+
+        .page-slide:nth-child(3) {
+            background-image: url('images/team-header-3.jpg');
         }
 
         .page-header h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .page-header p {
@@ -149,6 +201,8 @@
             opacity: 0.95;
             max-width: 700px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         /* Team Section */
@@ -497,16 +551,16 @@
     <header class="header" id="header">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="Studio Legale FM">
-                <span class="logo-sub">Studio Legale</span>
+                <img src="images/logo.png" alt="Studio Legale Fedeli, Macchi & Partners">
             </a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
             <nav>
                 <ul id="navMenu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="studio.html">Lo Studio</a></li>
-                    <li><a href="aree-pratica.html">Aree di Pratica</a></li>
+                    <li><a href="specializzazioni.html">Specializzazioni</a></li>
                     <li><a href="team.html">Team</a></li>
+                    <li><a href="approfondimenti.html">Approfondimenti</a></li>
                     <li><a href="contatti.html" class="cta-button">Contattaci</a></li>
                 </ul>
             </nav>
@@ -515,6 +569,13 @@
 
     <!-- Page Header -->
     <section class="page-header">
+        <!-- Slideshow Background -->
+        <div class="page-header-slideshow">
+            <div class="page-slide active"></div>
+            <div class="page-slide"></div>
+            <div class="page-slide"></div>
+        </div>
+        
         <h1>Il Nostro Team</h1>
         <p>Professionisti esperti e qualificati al vostro servizio</p>
     </section>
@@ -531,7 +592,9 @@
             <div class="team-grid">
                 <!-- Avv. Alberto Fedeli -->
                 <div class="team-card">
-                    <img src="images/team/Alberto_Vittorio_Fedeli.jpg" alt="Avv. Alberto VittorioFedeli">
+                    <div class="team-image">
+                        <img src="images/team/Alberto_Vittorio_Fedeli.jpg" alt="Avv. Alberto Vittorio Fedeli" onerror="this.style.display='none'; this.parentElement.setAttribute('data-initials', 'AF');">
+                    </div>
                     <div class="team-info">
                         <h3 class="team-name">Avv. Alberto Fedeli</h3>
                         <p class="team-role">Titolare di Studio</p>
@@ -555,7 +618,9 @@
 
                 <!-- Avv. Giulia Macchi -->
                 <div class="team-card">
-                    <img src="images/team/Giulia_Macchi.jpg" alt="Avv. Giulia Macchi">
+                    <div class="team-image">
+                        <img src="images/team/Giulia_Macchi.jpg" alt="Avv. Giulia Macchi" onerror="this.style.display='none'; this.parentElement.setAttribute('data-initials', 'GM');">
+                    </div>
                     <div class="team-info">
                         <h3 class="team-name">Avv. Giulia Macchi</h3>
                         <p class="team-role">Contitolare di Studio</p>
@@ -579,7 +644,9 @@
 
                 <!-- Avv. Nadia Zilli -->
                 <div class="team-card">
-                    <img src="images/team/Nadia_Zilli.jpg" alt="Avv. Nadia Zilli">
+                    <div class="team-image">
+                        <img src="images/team/Nadia_Zilli.jpg" alt="Avv. Nadia Zilli" onerror="this.style.display='none'; this.parentElement.setAttribute('data-initials', 'NZ');">
+                    </div>
                     <div class="team-info">
                         <h3 class="team-name">Avv. Nadia Zilli</h3>
                         <p class="team-role">Avvocato</p>
@@ -603,7 +670,9 @@
 
                 <!-- Avv. Erika Pallone -->
                 <div class="team-card">
-                    <img src="images/team/Erika_Caterina_Pallone.jpg" alt="Avv. Erika Pallone">
+                    <div class="team-image">
+                        <img src="images/team/Erika_Caterina_Pallone.jpg" alt="Avv. Erika Pallone" onerror="this.style.display='none'; this.parentElement.setAttribute('data-initials', 'EP');">
+                    </div>
                     <div class="team-info">
                         <h3 class="team-name">Avv. Erika Pallone</h3>
                         <p class="team-role">Avvocato</p>
@@ -625,11 +694,13 @@
                     </div>
                 </div>
 
-                <!-- Avv. Andrea Turolla -->
+                <!-- Avv. Andrea Michieli -->
                 <div class="team-card">
-                    <img src="images/team/Andrea_Turolla.jpg" alt="Avv. Andrea Turolla">
+                    <div class="team-image">
+                        <img src="images/team/Andrea_Michieli.jpg" alt="Avv. Andrea Michieli" onerror="this.style.display='none'; this.parentElement.setAttribute('data-initials', 'AM');">
+                    </div>
                     <div class="team-info">
-                        <h3 class="team-name">Avv. Andrea Turolla</h3>
+                        <h3 class="team-name">Avv. Andrea Michieli</h3>
                         <p class="team-role">Avvocato</p>
                         <p class="team-title">Avvocato del Foro di Milano - Dottore di Ricerca</p>
                         
@@ -732,9 +803,33 @@
                 header.classList.remove('scrolled');
             }
         });
+
+        // Page Header Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.page-slide');
+        const slideCount = slides.length;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slideCount;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Cambia immagine ogni 5 secondi
+        if (slides.length > 0) {
+            setInterval(nextSlide, 5000);
+        }
     </script>
-<!-- Extra Features -->
-<script src="extra-features.js"></script>
-<link rel="stylesheet" href="extra-styles.css">
+    </footer>
+
+    <!-- Cookie Consent Banner (GDPR) -->
+    <script src="cookie-banner.js"></script>
+
+    <!-- WhatsApp + Back to Top -->
+    <script src="floating-buttons.js"></script>
+
+    <script>
+        // ... resto del JavaScript già presente
+    </script>
 </body>
 </html>
