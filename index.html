@@ -397,23 +397,15 @@
 }
 
 .service-icon img {
-    width: 36px !important;
-    height: 36px !important;
-    max-width: 36px !important;
-    max-height: 36px !important;
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
     object-fit: contain !important;
-    filter: brightness(0) invert(1) !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-}
-
-/* Fallback emoji */
-.service-icon::before {
-    content: attr(data-emoji);
-    font-size: 1.8rem;
-    display: block;
 }
 
 .service-icon:has(img) ::before {
